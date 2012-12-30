@@ -18,7 +18,7 @@ public final class R {
     }
     public static final class id {
         public static final int car=0x7f070006;
-        public static final int imageView1=0x7f070001;
+        public static final int image=0x7f070001;
         public static final int infos=0x7f070005;
         public static final int linearLayout1=0x7f070000;
         public static final int listView1=0x7f070009;

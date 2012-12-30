@@ -2,9 +2,11 @@ package com.example.monappli;
 
 import android.app.TabActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 
 public class MainActivity extends TabActivity {
@@ -39,7 +41,24 @@ public class MainActivity extends TabActivity {
 	tabSpec = tabHost.newTabSpec("favoris").setIndicator("Favoris",getResources().getDrawable(R.drawable.iconfavoris)).setContent(intent);
 	tabHost.addTab(tabSpec);
 	
+	for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
+    {
+    if (i == 0) tabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#FF8C00"));
 
+    else tabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#000000"));
+    }  
+	
+	tabHost.setOnTabChangedListener(new OnTabChangeListener(){
+		@Override
+		public void onTabChanged(String tabId) {
+		    // TODO Auto-generated method stub
+		     for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
+		        {
+		          tabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#000000")); //unselected
+		        }
+		        tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab()).setBackgroundColor(Color.parseColor("#FF8C00")); // selected
+		}
+		});
 
 	}
 
