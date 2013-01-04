@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -24,8 +23,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.text.Editable;
+import android.text.TextWatcher;
 
 public class ListActivity extends Activity {
 
@@ -41,6 +43,8 @@ public class ListActivity extends Activity {
 	Result result;
 	ImageAdapter adapter;
 	List<Result> results = new ArrayList<Result>();
+	// Search EditText
+    EditText inputSearch;
 
 	public static final String TAG = "MyActivity";
 
@@ -72,11 +76,41 @@ public class ListActivity extends Activity {
 			}
 
 			myListView = (ListView) findViewById(R.id.listView1);
+			inputSearch = (EditText) findViewById(R.id.inputSearch);
 			adapter = new ImageAdapter(this, results);
 			myListView.setTextFilterEnabled(true);
 			setTheme(R.style.WidgetBackground);
 
 			myListView.setAdapter(adapter);
+			
+			inputSearch.addTextChangedListener(new TextWatcher() {
+				 
+	            @Override
+	            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+	                // When user changed the Text
+	            	 adapter.filter(cs.toString());
+	            	 Log.i(TAG, "*** Search value changed: " + cs.toString());
+ 
+	               
+	                
+	            }
+	 
+	            @Override
+	            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+	                    int arg3) {
+	                // TODO Auto-generated method stub
+	 
+	            }
+	 
+	            @Override
+	            public void afterTextChanged(Editable arg0) {
+	                // TODO Auto-generated method stub
+	            	
+		            
+	            }
+
+	        });
+			
 			intent = new Intent(this, DetailActivity.class);
 
 			myListView.setOnItemClickListener(new OnItemClickListener() {

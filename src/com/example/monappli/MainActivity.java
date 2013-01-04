@@ -21,24 +21,25 @@ public class MainActivity extends TabActivity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main);
 
-	Intent intent = new Intent(this, ListActivity.class);
+	Intent intentList = new Intent(this, ListActivity.class);
+	Intent intentMap= new Intent(this, MaMapActivity.class);
 
 
 	tabHost = getTabHost();
-	intent.putExtra("valeur", "liste");
+	//intentList.putExtra("valeur", "liste");
 
-	tabSpec = tabHost.newTabSpec("liste").setIndicator("Liste",getResources().getDrawable(R.drawable.iconliste)).setContent(intent);
+	tabSpec = tabHost.newTabSpec("liste").setIndicator("Liste",getResources().getDrawable(R.drawable.iconliste)).setContent(intentList);
 	tabHost.addTab(tabSpec);
 
-	intent.putExtra("valeur", "carte");
+	
 
-	tabSpec = tabHost.newTabSpec("carte").setIndicator("Carte",getResources().getDrawable(R.drawable.iconcarte)).setContent(intent);
+	tabSpec = tabHost.newTabSpec("carte").setIndicator("Carte",getResources().getDrawable(R.drawable.iconcarte)).setContent(intentMap);
 	tabHost.addTab(tabSpec);
 	
-	intent.putExtra("valeur", "favoris");
+	
 
 	
-	tabSpec = tabHost.newTabSpec("favoris").setIndicator("Favoris",getResources().getDrawable(R.drawable.iconfavoris)).setContent(intent);
+	tabSpec = tabHost.newTabSpec("favoris").setIndicator("Favoris",getResources().getDrawable(R.drawable.iconfavoris)).setContent(intentList);
 	tabHost.addTab(tabSpec);
 	
 	for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
