@@ -67,7 +67,7 @@ public class ListActivity extends Activity {
 			for (int i = 0; i < jsonArray.length(); i++) {
 
 				JSONObject j = jsonArray.getJSONObject(i);
-				Log.d(TAG, j.toString());
+				//Log.d(TAG, j.toString());
 				result = new Result(j.getString(TAG_NAME),
 						j.getString(TAG_SECTEUR), j.getString(TAG_QUARTIER),j.getString(TAG_INFORMATIONS),j.getString(TAG_IMAGE));
 

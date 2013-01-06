@@ -44,6 +44,7 @@ public class MaMapActivity extends MapActivity{
 	private static final String TAG_SECTEUR = "secteur";
 	private static final String TAG_NAME = "nom";
 	private static final String TAG_IMAGE = "image";
+	private static final String TAG_INFORMATIONS = "informations";
 	private static final String TAG_LAT = "lat";
 	private static final String TAG_LON = "lon";
 	Result result;
@@ -98,11 +99,10 @@ public class MaMapActivity extends MapActivity{
 			Log.i(TAG, "Number of entries" + jsonArray.length());
 			for (int i = 0; i < jsonArray.length(); i++) {
 
-				JSONObject j = jsonArray.getJSONObject(i);
-				Log.d(TAG, j.toString());		
+				JSONObject j = jsonArray.getJSONObject(i);	
 				Double lat = j.getDouble(TAG_LAT)*1E6 ;
 				Double lon= j.getDouble(TAG_LON)*1E6;
-				items.add(new OverlayItem(new GeoPoint(lat.intValue(),lon.intValue()),j.getString(TAG_NAME),j.getString(TAG_SECTEUR)+""+j.getString(TAG_QUARTIER)));	
+				items.add(new OverlayItem(new GeoPoint(lat.intValue(),lon.intValue()),j.getString(TAG_NAME),j.getString(TAG_SECTEUR)+"|"+j.getString(TAG_QUARTIER)+"|"+j.getString(TAG_IMAGE)+"|"+j.getString(TAG_INFORMATIONS)));	
 			}
 		}
 			catch (JSONException e) {
@@ -117,7 +117,7 @@ public class MaMapActivity extends MapActivity{
 	public void setOverly(){
 		mapOverlays = mapView.getOverlays();
 		Drawable drawable1=this.getResources().getDrawable(R.drawable.ic_marqueur);
-		itemizedOverlay1 = new MyItemizedOverlay(drawable1);
+		itemizedOverlay1 = new MyItemizedOverlay(drawable1,this);
 		for(int i=0;i<items.size();i++){
 			itemizedOverlay1.addOverlay(items.get(i));
 		}

@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp" />
+
+    <TextView
+        android:id="@+id/secteur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/image"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="18dp"
+        android:layout_toRightOf="@+id/image"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/yaller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/favoris"
+        android:layout_alignBottom="@+id/favoris"
+        android:layout_marginLeft="24dp"
+        android:layout_toRightOf="@+id/favoris"
+        android:text="Y aller" />
+
+    <Button
+        android:id="@+id/detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/yaller"
+        android:layout_alignBottom="@+id/yaller"
+        android:layout_marginLeft="17dp"
+        android:layout_toRightOf="@+id/yaller"
+        android:text="Détail" />
+
+    <TextView
+        android:id="@+id/quartier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/favoris"
+        android:layout_alignLeft="@+id/secteur"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/favoris"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image"
+        android:layout_marginTop="54dp"
+        android:layout_toLeftOf="@+id/quartier"
+        android:text="Favoris" />
+
+</RelativeLayout>

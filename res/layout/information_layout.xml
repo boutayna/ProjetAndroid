@@ -55,29 +55,31 @@
                 android:text="TextView" />
 
             <Button
-                android:id="@+id/carte"
+                android:id="@+id/favoris"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="28dp"
-                android:layout_toRightOf="@+id/infos"
-                android:text="Carte" />
+                android:layout_below="@+id/infos"
+                android:layout_marginTop="80dp"
+                android:layout_toLeftOf="@+id/yaller"
+                android:text="Favoris" />
 
             <Button
                 android:id="@+id/yaller"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_alignBaseline="@+id/favoris"
+                android:layout_alignBottom="@+id/favoris"
                 android:layout_toLeftOf="@+id/carte"
                 android:text="Y aller" />
 
             <Button
-                android:id="@+id/favoris"
+                android:id="@+id/carte"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginRight="15dp"
-                android:layout_toLeftOf="@+id/infos"
-                android:text="Favoris" />
+                android:layout_alignBaseline="@+id/yaller"
+                android:layout_alignBottom="@+id/yaller"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="14dp"
+                android:text="Carte" />
 
         </RelativeLayout>
