@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -46,14 +45,6 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 	@Override
 	protected boolean onTap(final int i) {
 		GeoPoint gpoint = myOverlays.get(i).getPoint();
-		// double lat = gpoint.getLatitudeE6()/1e6;
-		// double lon = gpoint.getLongitudeE6()/1e6;
-		// String toast = "Title : " + myOverlays.get(i).getTitle();
-		// toast += "\nText: "+myOverlays.get(i).getSnippet();
-		// toast += "\nSymbol coordinates : Lat = " +lat+
-		// " Lon= "+lon+"(microdegrees)";
-		// Toast.makeText(MaMapActivity.context, toast,
-		// Toast.LENGTH_LONG).show();
 
 		// Création de l'AlertDialog
 		LayoutInflater factory = LayoutInflater.from(context);
@@ -77,10 +68,6 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 
 		result = myOverlays.get(i).getSnippet().split("\\|");
 
-		Log.d(TAG, result[0]);
-		Log.d(TAG, result[1]);
-		Log.d(TAG, result[2]);
-		Log.d(TAG, result[3]);
 		sec.setText(result[0]);
 		quart.setText(result[1]);
 		ImageLoader imageLoader = ImageLoader.getInstance();
@@ -103,20 +90,20 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 				context.startActivity(intent);
 			}
 		});
-		
+
 		yaller.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				
+
 			}
 		});
-		
+
 		favoris.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				
+
 			}
 		});
 

@@ -1,16 +1,26 @@
 package com.example.monappli;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-public class DetailActivity extends Activity {
+public class DetailActivity extends Activity implements OnClickListener {
 	public static final String TAG = "MyActivity";
+	Button carte;
+	Double lon;
+	Double lat;
+	String nom;
+	String infos;
 
 	/** Called when the activity is first created. */
 
@@ -22,11 +32,14 @@ public class DetailActivity extends Activity {
 		if (extras == null) {
 			return;
 		}
-		String nom = extras.getString("name");
+		nom = extras.getString("name");
 		String quartier = extras.getString("quartier");
 		String secteur = extras.getString("secteur");
-		String infos = extras.getString("infos");
+		infos = extras.getString("infos");
 		String image = extras.getString("image");
+		lon = extras.getDouble("lon");
+		lat = extras.getDouble("lat");
+
 		if (nom != null && quartier != null && secteur != null && infos != null) {
 			TextView name = (TextView) findViewById(R.id.name);
 			TextView quart = (TextView) findViewById(R.id.quartier);
@@ -45,5 +58,22 @@ public class DetailActivity extends Activity {
 			inf.setText(Html.fromHtml(infos));
 		}
 
+		Button yaller = (Button) findViewById(R.id.yaller);
+		Button favoris = (Button) findViewById(R.id.favoris);
+		carte = (Button) findViewById(R.id.carte);
+
+		carte.setOnClickListener(this);
+	}
+
+	public void onClick(View V) {
+		if (V == carte) {
+			Intent intent = new Intent(this, CarteActivity.class);
+			intent.putExtra("lon", lon);
+			intent.putExtra("lat", lat);
+			intent.putExtra("name", nom);
+			intent.putExtra("infos", infos);
+
+			startActivity(intent);
+		}
 	}
 }

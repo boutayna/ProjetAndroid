@@ -38,6 +38,8 @@ public class ListActivity extends Activity {
 	private static final String TAG_INFORMATIONS = "informations";
 	private static final String TAG_NAME = "nom";
 	private static final String TAG_IMAGE = "image";
+	private static final String TAG_LAT = "lat";
+	private static final String TAG_LON = "lon";
 	ListView myListView;
 	Intent intent;
 	Result result;
@@ -69,7 +71,7 @@ public class ListActivity extends Activity {
 				JSONObject j = jsonArray.getJSONObject(i);
 				//Log.d(TAG, j.toString());
 				result = new Result(j.getString(TAG_NAME),
-						j.getString(TAG_SECTEUR), j.getString(TAG_QUARTIER),j.getString(TAG_INFORMATIONS),j.getString(TAG_IMAGE));
+						j.getString(TAG_SECTEUR), j.getString(TAG_QUARTIER),j.getString(TAG_INFORMATIONS),j.getString(TAG_IMAGE),j.getDouble(TAG_LON),j.getDouble(TAG_LAT));
 
 				results.add(result);
 
@@ -124,6 +126,8 @@ public class ListActivity extends Activity {
 					intent.putExtra("secteur",((Result)(adapter.getItem(position))).getSecteur());
 					intent.putExtra("image", ((Result)(adapter.getItem(position))).getUrlImage());
 					intent.putExtra("infos", ((Result)(adapter.getItem(position))).getInformations());
+					intent.putExtra("lon", ((Result)(adapter.getItem(position))).getLon());
+					intent.putExtra("lat", ((Result)(adapter.getItem(position))).getLat());
 					
 					startActivity(intent);
 
