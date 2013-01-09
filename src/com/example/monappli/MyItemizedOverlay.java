@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,6 +26,7 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 	private Context context;
 	public static final String TAG = "MyActivity";
 	private String[] result;
+	private GeoPoint gpoint;
 
 	public MyItemizedOverlay(Drawable drawable, Context context) {
 		super(boundCenterBottom(drawable));
@@ -44,7 +46,7 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 
 	@Override
 	protected boolean onTap(final int i) {
-		GeoPoint gpoint = myOverlays.get(i).getPoint();
+		gpoint = myOverlays.get(i).getPoint();
 
 		// Création de l'AlertDialog
 		LayoutInflater factory = LayoutInflater.from(context);
@@ -95,6 +97,9 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 
 			@Override
 			public void onClick(View v) {
+				
+				Intent intent=new Intent(Intent.ACTION_VIEW,Uri.parse("https://maps.google.fr/maps?q="+gpoint.getLatitudeE6()*1E-6+","+gpoint.getLongitudeE6()*1E-6));
+				context.startActivity(intent);
 
 			}
 		});

@@ -2,6 +2,7 @@ package com.example.monappli;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -21,6 +22,8 @@ public class DetailActivity extends Activity implements OnClickListener {
 	Double lat;
 	String nom;
 	String infos;
+	Button yaller;
+	Button favoris;
 
 	/** Called when the activity is first created. */
 
@@ -58,11 +61,13 @@ public class DetailActivity extends Activity implements OnClickListener {
 			inf.setText(Html.fromHtml(infos));
 		}
 
-		Button yaller = (Button) findViewById(R.id.yaller);
-		Button favoris = (Button) findViewById(R.id.favoris);
+		yaller = (Button) findViewById(R.id.yaller);
+		favoris = (Button) findViewById(R.id.favoris);
 		carte = (Button) findViewById(R.id.carte);
 
 		carte.setOnClickListener(this);
+		yaller.setOnClickListener(this);
+		favoris.setOnClickListener(this);
 	}
 
 	public void onClick(View V) {
@@ -73,6 +78,11 @@ public class DetailActivity extends Activity implements OnClickListener {
 			intent.putExtra("name", nom);
 			intent.putExtra("infos", infos);
 
+			startActivity(intent);
+		}
+		if(V==yaller)
+		{
+			Intent intent=new Intent(Intent.ACTION_VIEW,Uri.parse("https://maps.google.fr/maps?q="+lat+","+lon));
 			startActivity(intent);
 		}
 	}
