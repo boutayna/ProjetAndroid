@@ -20,14 +20,16 @@
         android:label="@string/app_name" 
         android:theme="@android:style/Theme.NoTitleBar">
         <uses-library android:name="com.google.android.maps"/>
+        
         <activity
-            android:name="com.example.monappli.MainActivity"
-            android:label="@string/app_name" >
+            android:name="com.example.monappli.SplashScreenActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="com.example.monappli.MainActivity">    
         </activity>
         <activity android:name=".ActiviteTab" >
         </activity>
