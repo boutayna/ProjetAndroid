@@ -35,6 +35,7 @@ public class FavorisAdapter extends BaseAdapter {
 	Result res;
 	Context currentContext;
 	View vue;
+	ViewHolder holder;
 	
 
 	public static final String TAG = "MyActivity";
@@ -54,7 +55,7 @@ public class FavorisAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 	
-		ViewHolder holder;
+		
 		settings = parent.getContext().getSharedPreferences("PRIVATE_FAVORIS",
 				0);
 		editor = settings.edit();
@@ -87,7 +88,7 @@ public class FavorisAdapter extends BaseAdapter {
 		holder.secteur.setText(res.getSecteur());
 		holder.favoris.setImageResource(R.drawable.ic_favoris);
 		holder.delFavoris.setImageResource(R.drawable.delete_icon);
-		holder.delFavoris.setId(position);
+		holder.delFavoris.setId(res.getId());
 		holder.delFavoris.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -110,10 +111,20 @@ public class FavorisAdapter extends BaseAdapter {
 									Log.d(TAG, favoris);
 									editor.putString("favoris", favoris);
 									editor.commit();
-									Toast.makeText(currentContext,
-											results.get(vue.getId()).getName() + " a été supprimé.",
-											Toast.LENGTH_SHORT).show();
-									results.remove(vue.getId());
+									
+									for(int i=0;i<results.size();i++)  
+								    {  
+								              
+								                if(results.get(i).getId()==vue.getId())  
+								                {      
+								                   Toast.makeText(currentContext,
+															results.get(i).getName() + " a été supprimé.",
+															Toast.LENGTH_SHORT).show();
+								                   results.remove(i);
+								                }
+								    }  
+								          //i=0;  hope this one will be a dirt code  
+    
 									notifyDataSetChanged();
 								}
 							  })
