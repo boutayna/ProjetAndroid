@@ -23,6 +23,7 @@ public class MainActivity extends TabActivity {
 
 	Intent intentList = new Intent(this, ListActivity.class);
 	Intent intentMap= new Intent(this, MaMapActivity.class);
+	Intent intentFavoris = new Intent(this, FavorisActivity.class);
 
 
 	tabHost = getTabHost();
@@ -39,7 +40,7 @@ public class MainActivity extends TabActivity {
 	
 
 	
-	tabSpec = tabHost.newTabSpec("favoris").setIndicator("Favoris",getResources().getDrawable(R.drawable.iconfavoris)).setContent(intentList);
+	tabSpec = tabHost.newTabSpec("favoris").setIndicator("Favoris",getResources().getDrawable(R.drawable.iconfavoris)).setContent(intentFavoris);
 	tabHost.addTab(tabSpec);
 	
 	for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)

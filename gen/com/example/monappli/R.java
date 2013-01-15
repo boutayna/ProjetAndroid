@@ -16,39 +16,47 @@ public final class R {
         public static final int defacto_tab_itineraire_w=0x7f020002;
         public static final int defacto_tab_news_w=0x7f020003;
         public static final int defacto_tab_recherche_w=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int ic_marqueur=0x7f020006;
-        public static final int icon=0x7f020007;
-        public static final int iconcarte=0x7f020008;
-        public static final int iconfavoris=0x7f020009;
-        public static final int iconliste=0x7f02000a;
+        public static final int delete_icon=0x7f020005;
+        public static final int ic_addfavoris=0x7f020006;
+        public static final int ic_favoris=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int ic_marqueur=0x7f020009;
+        public static final int icon=0x7f02000a;
+        public static final int iconcarte=0x7f02000b;
+        public static final int iconfavoris=0x7f02000c;
+        public static final int iconliste=0x7f02000d;
     }
     public static final class id {
-        public static final int car=0x7f07000a;
-        public static final int carte=0x7f070009;
+        public static final int addFavoris=0x7f07000f;
+        public static final int car=0x7f07000b;
+        public static final int carte=0x7f07000a;
+        public static final int delFavoris=0x7f07000e;
         public static final int detail=0x7f070004;
         public static final int favoris=0x7f070003;
         public static final int image=0x7f070000;
-        public static final int infos=0x7f070008;
-        public static final int inputSearch=0x7f07000e;
-        public static final int linearLayout1=0x7f070006;
-        public static final int listView1=0x7f07000f;
-        public static final int map=0x7f07000d;
-        public static final int menu_settings=0x7f070010;
-        public static final int name=0x7f070007;
+        public static final int infos=0x7f070009;
+        public static final int inputSearch=0x7f070011;
+        public static final int linearLayout1=0x7f070007;
+        public static final int listView1=0x7f070006;
+        public static final int map=0x7f070010;
+        public static final int menu_settings=0x7f070012;
+        public static final int name=0x7f070008;
         public static final int quartier=0x7f070005;
-        public static final int sec=0x7f07000c;
+        public static final int sec=0x7f07000d;
         public static final int secteur=0x7f070001;
-        public static final int tiret=0x7f07000b;
+        public static final int tiret=0x7f07000c;
         public static final int yaller=0x7f070002;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int alert_dialog=0x7f030001;
-        public static final int information_layout=0x7f030002;
-        public static final int json_layout=0x7f030003;
-        public static final int map_layout=0x7f030004;
-        public static final int mylistview=0x7f030005;
+        public static final int dialog=0x7f030002;
+        public static final int favoris_layout=0x7f030003;
+        public static final int information_layout=0x7f030004;
+        public static final int item_favoris=0x7f030005;
+        public static final int json_layout=0x7f030006;
+        public static final int map_layout=0x7f030007;
+        public static final int mylistview=0x7f030008;
     }
     public static final class menu {
         public static final int activity_main=0x7f060000;

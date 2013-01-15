@@ -1,6 +1,7 @@
 package com.example.monappli;
 
 public class Result {
+	private int id;
 	private String name;
 	private String secteur;
 	private String quartier;
@@ -9,13 +10,16 @@ public class Result {
 	private Double lon;
 	private Double lat;
 
+	
 	@Override
 	public String toString() {
 		return "Result [name=" + name + ", secteur=" + secteur + ", quartier="
 				+ quartier + ", informations=" + informations + ", urlImage="
 				+ urlImage + "]";
 	}
-
+	public int getId(){
+		return id;
+	}
 	public Double getLon() {
 		return lon;
 	}
@@ -42,9 +46,10 @@ public class Result {
 		this.urlImage = urlImage;
 	}
 
-	public Result(String name, String secteur, String quartier,
+	public Result(int id,String name, String secteur, String quartier,
 			String informations, String urlImage, Double lon, Double lat) {
 		super();
+		this.id=id;
 		this.name = name;
 		this.secteur = secteur;
 		this.quartier = quartier;

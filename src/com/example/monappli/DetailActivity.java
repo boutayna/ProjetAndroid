@@ -2,6 +2,7 @@ package com.example.monappli;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -11,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -18,12 +20,16 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 public class DetailActivity extends Activity implements OnClickListener {
 	public static final String TAG = "MyActivity";
 	Button carte;
+	int id;
 	Double lon;
 	Double lat;
 	String nom;
 	String infos;
 	Button yaller;
-	Button favoris;
+	Button fav;
+	SharedPreferences settings;
+	SharedPreferences.Editor editor;
+	String favoris;
 
 	/** Called when the activity is first created. */
 
@@ -42,6 +48,7 @@ public class DetailActivity extends Activity implements OnClickListener {
 		String image = extras.getString("image");
 		lon = extras.getDouble("lon");
 		lat = extras.getDouble("lat");
+		id=extras.getInt("id");
 
 		if (nom != null && quartier != null && secteur != null && infos != null) {
 			TextView name = (TextView) findViewById(R.id.name);
@@ -62,12 +69,12 @@ public class DetailActivity extends Activity implements OnClickListener {
 		}
 
 		yaller = (Button) findViewById(R.id.yaller);
-		favoris = (Button) findViewById(R.id.favoris);
+		fav = (Button) findViewById(R.id.favoris);
 		carte = (Button) findViewById(R.id.carte);
 
 		carte.setOnClickListener(this);
 		yaller.setOnClickListener(this);
-		favoris.setOnClickListener(this);
+		fav.setOnClickListener(this);
 	}
 
 	public void onClick(View V) {
@@ -84,6 +91,20 @@ public class DetailActivity extends Activity implements OnClickListener {
 		{
 			Intent intent=new Intent(Intent.ACTION_VIEW,Uri.parse("https://maps.google.fr/maps?q="+lat+","+lon));
 			startActivity(intent);
+		}
+		if(V==fav)
+		{
+			settings = this.getSharedPreferences("PRIVATE_FAVORIS",
+					0);
+			editor = settings.edit();
+			favoris = settings.getString("favoris", "");
+			favoris += ";" + String.valueOf(id);
+			Log.d(TAG, favoris);
+			editor.putString("favoris", favoris);
+			editor.commit();
+			Toast.makeText(this,
+					nom + " a été ajouté aux favoris.",
+					Toast.LENGTH_SHORT).show();
 		}
 	}
 }

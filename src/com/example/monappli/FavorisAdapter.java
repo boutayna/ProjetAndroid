@@ -1,11 +1,16 @@
 package com.example.monappli;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,7 +23,7 @@ import android.widget.Toast;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-public class ImageAdapter extends BaseAdapter {
+public class FavorisAdapter extends BaseAdapter {
 	LayoutInflater inflater;
 	ImageLoader imageLoader;
 	List<Result> results;
@@ -29,10 +34,12 @@ public class ImageAdapter extends BaseAdapter {
 	ImageView addFavoris;
 	Result res;
 	Context currentContext;
+	View vue;
+	
 
 	public static final String TAG = "MyActivity";
 
-	public ImageAdapter(Context context, List<Result> objects) {
+	public FavorisAdapter(Context context, List<Result> objects) {
 		super();
 		inflater = LayoutInflater.from(context);
 		this.results = objects;
@@ -46,23 +53,25 @@ public class ImageAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-
+	
 		ViewHolder holder;
 		settings = parent.getContext().getSharedPreferences("PRIVATE_FAVORIS",
 				0);
 		editor = settings.edit();
 		favoris = settings.getString("favoris", "");
+
 		Log.d(TAG, favoris);
 		Log.d(TAG, "passFav");
 		if (convertView == null) {
 			Log.v("test", "convertView is null");
 			holder = new ViewHolder();
-			convertView = inflater.inflate(R.layout.json_layout, null);
+			convertView = inflater.inflate(R.layout.item_favoris, null);
 			holder.name = (TextView) convertView.findViewById(R.id.name);
 			holder.quartier = (TextView) convertView.findViewById(R.id.car);
 			holder.secteur = (TextView) convertView.findViewById(R.id.sec);
 			holder.image = (ImageView) convertView.findViewById(R.id.image);
-			holder.favoris = (ImageView) convertView.findViewById(R.id.addFavoris);
+			holder.favoris = (ImageView) convertView.findViewById(R.id.favoris);
+			holder.delFavoris=(ImageView) convertView.findViewById(R.id.delFavoris);
 			convertView.setTag(holder);
 		} else {
 			Log.v("test", "convertView is not null");
@@ -76,28 +85,53 @@ public class ImageAdapter extends BaseAdapter {
 		holder.name.setText(res.getName());
 		holder.quartier.setText(res.getQuartier());
 		holder.secteur.setText(res.getSecteur());
-		if (favoris.indexOf(String.valueOf(";"+res.getId())) >=0) {
-			Log.d(TAG, "est un favoris"+String.valueOf(res.getId()));
-			holder.favoris.setImageResource(R.drawable.ic_favoris);
-		} else {
-			Log.d(TAG, String.valueOf(";" + res.getId()));
-			holder.favoris.setImageResource(R.drawable.ic_addfavoris);
-			holder.favoris.setId(position);
-			holder.favoris.setOnClickListener(new OnClickListener() {
+		holder.favoris.setImageResource(R.drawable.ic_favoris);
+		holder.delFavoris.setImageResource(R.drawable.delete_icon);
+		holder.delFavoris.setId(position);
+		holder.delFavoris.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-					favoris += ";" + String.valueOf(v.getId());
-					Log.d(TAG, favoris);
-					editor.putString("favoris", favoris);
-					editor.commit();
-					((ImageView) v).setImageResource(R.drawable.ic_favoris);
-					Toast.makeText(currentContext,
-							results.get(v.getId()).getName() + " a été ajouté aux favoris.",
-							Toast.LENGTH_SHORT).show();
+					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(currentContext);
+
+						// set title
+						alertDialogBuilder.setTitle("Alerte !!");
+						vue=v;
+						// set dialog message
+						alertDialogBuilder
+							.setMessage("Voulez-vous supprimer le favoris?")
+							.setCancelable(false)
+							.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,int id) {
+									// if this button is clicked, close
+									// current activity
+									favoris=favoris.replace(";" + String.valueOf(vue.getId())
+											,"");
+									Log.d(TAG, favoris);
+									editor.putString("favoris", favoris);
+									editor.commit();
+									Toast.makeText(currentContext,
+											results.get(vue.getId()).getName() + " a été supprimé.",
+											Toast.LENGTH_SHORT).show();
+									results.remove(vue.getId());
+									notifyDataSetChanged();
+								}
+							  })
+							.setNegativeButton("No",new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,int id) {
+									dialog.cancel();
+								}
+							});
+			 
+							// create alert dialog
+							AlertDialog alertDialog = alertDialogBuilder.create();
+			 
+							// show it
+							alertDialog.show();
+					
 				}
 			});
-		}
+
 
 		imageLoader.displayImage(res.getUrlImage(), holder.image);
 		return convertView;
@@ -109,6 +143,7 @@ public class ImageAdapter extends BaseAdapter {
 		TextView secteur;
 		ImageView image;
 		ImageView favoris;
+		ImageView delFavoris;
 	}
 
 	@Override
@@ -157,5 +192,6 @@ public class ImageAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 
 	}
+	
 
 }

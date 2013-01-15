@@ -47,6 +47,7 @@ public class MaMapActivity extends MapActivity{
 	private static final String TAG_INFORMATIONS = "informations";
 	private static final String TAG_LAT = "lat";
 	private static final String TAG_LON = "lon";
+	private static final String TAG_ID = "id";
 	Result result;
 	List<Result> results = new ArrayList<Result>();
 	public static final String TAG = "MyActivity";
@@ -102,7 +103,7 @@ public class MaMapActivity extends MapActivity{
 				JSONObject j = jsonArray.getJSONObject(i);	
 				Double lat = j.getDouble(TAG_LAT)*1E6 ;
 				Double lon= j.getDouble(TAG_LON)*1E6;
-				items.add(new OverlayItem(new GeoPoint(lat.intValue(),lon.intValue()),j.getString(TAG_NAME),j.getString(TAG_SECTEUR)+"|"+j.getString(TAG_QUARTIER)+"|"+j.getString(TAG_IMAGE)+"|"+j.getString(TAG_INFORMATIONS)));	
+				items.add(new OverlayItem(new GeoPoint(lat.intValue(),lon.intValue()),j.getString(TAG_NAME),j.getString(TAG_SECTEUR)+"|"+j.getString(TAG_QUARTIER)+"|"+j.getString(TAG_IMAGE)+"|"+j.getString(TAG_INFORMATIONS)+"|"+j.getString(TAG_ID)));	
 			}
 		}
 			catch (JSONException e) {

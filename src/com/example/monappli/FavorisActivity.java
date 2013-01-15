@@ -18,7 +18,10 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,10 +29,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.text.Editable;
-import android.text.TextWatcher;
 
-public class ListActivity extends Activity {
+public class FavorisActivity extends Activity implements OnSharedPreferenceChangeListener {
 
 	static JSONObject jObj = null;
 	static String json = "";
@@ -44,23 +45,25 @@ public class ListActivity extends Activity {
 	ListView myListView;
 	Intent intent;
 	Result result;
-	ImageAdapter adapter;
+	FavorisAdapter adapter;
 	List<Result> results = new ArrayList<Result>();
 	// Search EditText
     EditText inputSearch;
+    SharedPreferences settings;
+    String favoris;
+    boolean changed=false;
 
 	public static final String TAG = "MyActivity";
 	
-	
-
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		Log.d(TAG, "OnResume");
-		results.clear();
-		// getting JSON string from URL
-		JSONObject json = getJSONFromUrl("http://cci.corellis.eu/pois.php");
+	    super.onResume();
+	    // Set up a listener whenever a key changes
+	    settings = getApplicationContext().getSharedPreferences("PRIVATE_FAVORIS", 0);
+	    favoris=settings.getString("favoris", "");
+	    results.clear();
+	    Log.d(TAG,"onResume"+favoris);
+	    JSONObject json = getJSONFromUrl("http://cci.corellis.eu/pois.php");
 		if (json == null)
 			Log.d(TAG, "null");
 
@@ -72,49 +75,26 @@ public class ListActivity extends Activity {
 			for (int i = 0; i < jsonArray.length(); i++) {
 
 				JSONObject j = jsonArray.getJSONObject(i);
+				if (favoris.indexOf(";" + String.valueOf(j.getInt("id"))) >= 0) {
+        			result = new Result(j.getInt(TAG_ID),
+        					j.getString(TAG_NAME), 
+        					j.getString(TAG_SECTEUR),
+        					j.getString(TAG_QUARTIER),
+        					j.getString(TAG_INFORMATIONS),
+        					j.getString(TAG_IMAGE),
+        					j.getDouble(TAG_LAT), 
+        					j.getDouble(TAG_LON));
+        			results.add(result);
+    			}
 				//Log.d(TAG, j.toString());
-				result = new Result(j.getInt(TAG_ID),j.getString(TAG_NAME),
-						j.getString(TAG_SECTEUR), j.getString(TAG_QUARTIER),j.getString(TAG_INFORMATIONS),j.getString(TAG_IMAGE),j.getDouble(TAG_LON),j.getDouble(TAG_LAT));
-
-				results.add(result);
-
+				
 			}
 
 			myListView = (ListView) findViewById(R.id.listView1);
-			inputSearch = (EditText) findViewById(R.id.inputSearch);
-			adapter = new ImageAdapter(this, results);
-			myListView.setTextFilterEnabled(true);
+			adapter = new FavorisAdapter(this, results);
 			setTheme(R.style.WidgetBackground);
 
 			myListView.setAdapter(adapter);
-			
-			inputSearch.addTextChangedListener(new TextWatcher() {
-				 
-	            @Override
-	            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-	                // When user changed the Text
-	            	 adapter.filter(cs.toString());
-	            	 Log.i(TAG, "*** Search value changed: " + cs.toString());
- 
-	               
-	                
-	            }
-	 
-	            @Override
-	            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-	                    int arg3) {
-	                // TODO Auto-generated method stub
-	 
-	            }
-	 
-	            @Override
-	            public void afterTextChanged(Editable arg0) {
-	                // TODO Auto-generated method stub
-	            	
-		            
-	            }
-
-	        });
 			
 			intent = new Intent(this, DetailActivity.class);
 
@@ -131,7 +111,6 @@ public class ListActivity extends Activity {
 					intent.putExtra("infos", ((Result)(adapter.getItem(position))).getInformations());
 					intent.putExtra("lon", ((Result)(adapter.getItem(position))).getLon());
 					intent.putExtra("lat", ((Result)(adapter.getItem(position))).getLat());
-					intent.putExtra("id", ((Result)(adapter.getItem(position))).getId());
 					
 					startActivity(intent);
 
@@ -143,18 +122,17 @@ public class ListActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	   
 	}
 
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		setContentView(R.layout.mylistview);
-
+		setContentView(R.layout.favoris_layout);
 		
-
 	}
 
 	// constructor
-	public ListActivity() {
+	public FavorisActivity() {
 
 	}
 
@@ -209,5 +187,12 @@ public class ListActivity extends Activity {
 		}
 		return total.toString();
 
+	}
+
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences arg0, String arg1) {
+		adapter.notifyDataSetChanged();
+		Log.d(TAG,"notify");
+		
 	}
 }

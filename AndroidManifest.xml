@@ -39,6 +39,8 @@
         </activity>
         <activity android:name="com.example.monappli.CarteActivity" >
         </activity>
+        <activity android:name="com.example.monappli.FavorisActivity" >
+        </activity>
         
     </application>
 
