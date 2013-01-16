@@ -5,11 +5,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.boutayna.monappli.overlays.MyItemizedOverlay;
+import com.boutayna.monappli.overlays.MyItemizedOverlayCarte;
 import com.example.monappli.R;
-import com.example.monappli.R.drawable;
-import com.example.monappli.R.id;
-import com.example.monappli.R.layout;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
@@ -50,7 +47,8 @@ public class CarteActivity extends MapActivity {
         List<Overlay> mapOverlays = mapView.getOverlays();
         Drawable drawable = this.getResources().getDrawable(R.drawable.ic_marqueur);
          
-        MyItemizedOverlay itemizedoverlay = new MyItemizedOverlay(drawable, this);
+        MyItemizedOverlayCarte itemizedoverlay = new MyItemizedOverlayCarte(drawable, this);
+       
 
 		mapView.setBuiltInZoomControls(true) ;
 		GeoPoint point = new GeoPoint(lat.intValue(), lon.intValue());
