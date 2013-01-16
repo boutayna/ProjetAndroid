@@ -5,13 +5,31 @@
         android:orientation="vertical" >
 		 <!-- Editext for Search -->
 
-  	  <EditText
-  	      android:id="@+id/inputSearch"
-  	      android:layout_width="166dp"
-  	      android:layout_height="wrap_content"
-  	      android:drawableRight="@drawable/defacto_tab_recherche_w"
-  	      android:hint="Search.."
-  	      android:inputType="textVisiblePassword" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/inputSearch"
+                android:layout_width="133dp"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/defacto_tab_recherche_w"
+                android:ems="10"
+                android:hint="Search.."
+                android:inputType="textVisiblePassword" >
+
+                <requestFocus />
+            </EditText>
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:text="categories"
+                 />
+
+        </LinearLayout>
   	  
         <ListView
             android:id="@+id/listView1"

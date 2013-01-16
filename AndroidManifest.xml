@@ -22,26 +22,26 @@
         <uses-library android:name="com.google.android.maps"/>
         
         <activity
-            android:name="com.example.monappli.SplashScreenActivity"
+            android:name="com.boutayna.monappli.activities.SplashScreenActivity"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.monappli.MainActivity">    
+        <activity android:name="com.boutayna.monappli.activities.MainActivity">    
         </activity>
         <activity android:name=".ActiviteTab" >
         </activity>
-        <activity android:name="com.example.monappli.ListActivity" >
+        <activity android:name="com.boutayna.monappli.activities.ListActivity" >
         </activity>
-        <activity android:name="com.example.monappli.DetailActivity" >
+        <activity android:name="com.boutayna.monappli.activities.DetailActivity" >
         </activity>
-        <activity android:name="com.example.monappli.MaMapActivity" >
+        <activity android:name="com.boutayna.monappli.activities.MaMapActivity" >
         </activity>
-        <activity android:name="com.example.monappli.CarteActivity" >
+        <activity android:name="com.boutayna.monappli.activities.CarteActivity" >
         </activity>
-        <activity android:name="com.example.monappli.FavorisActivity" >
+        <activity android:name="com.boutayna.monappli.activities.FavorisActivity" >
         </activity>
         
     </application>

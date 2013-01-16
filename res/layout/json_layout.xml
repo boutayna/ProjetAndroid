@@ -64,10 +64,10 @@
                 android:layout_height="20dp" />
 
             <ImageView
-                android:id="@+id/delFavoris"
+                android:id="@+id/categorie"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginTop="0dp" />
+                android:layout_marginTop="5dp" />
         </LinearLayout>
     </LinearLayout>
 

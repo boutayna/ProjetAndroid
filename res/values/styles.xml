@@ -19,7 +19,6 @@
 
       <style name="WidgetBackground">
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@android:color/white</item>
         <item name="android:dividerHeight">12sp</item>
     </style>
  
