@@ -62,11 +62,12 @@ public final class R {
         public static final int dialog=0x7f030002;
         public static final int favoris_layout=0x7f030003;
         public static final int information_layout=0x7f030004;
-        public static final int item_favoris=0x7f030005;
-        public static final int json_layout=0x7f030006;
-        public static final int map_layout=0x7f030007;
-        public static final int mylistview=0x7f030008;
-        public static final int splash_screen=0x7f030009;
+        public static final int information_layout2=0x7f030005;
+        public static final int item_favoris=0x7f030006;
+        public static final int json_layout=0x7f030007;
+        public static final int map_layout=0x7f030008;
+        public static final int mylistview=0x7f030009;
+        public static final int splash_screen=0x7f03000a;
     }
     public static final class menu {
         public static final int activity_main=0x7f060000;

@@ -43,6 +43,8 @@
         </activity>
         <activity android:name="com.boutayna.monappli.activities.FavorisActivity" >
         </activity>
+        <activity android:name="com.boutayna.monappli.activities.DetailPOIMapActivity" >
+        </activity>
         
     </application>
 

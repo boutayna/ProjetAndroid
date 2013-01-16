@@ -17,10 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.boutayna.monappli.activities.DetailActivity;
+import com.boutayna.monappli.activities.DetailPOIMapActivity;
 import com.example.monappli.R;
-import com.example.monappli.R.id;
-import com.example.monappli.R.layout;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
@@ -91,7 +89,7 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, DetailActivity.class);
+				Intent intent = new Intent(context, DetailPOIMapActivity.class);
 				intent.putExtra("name", myOverlays.get(i).getTitle());
 				intent.putExtra("quartier", result[1]);
 				intent.putExtra("secteur", result[0]);
